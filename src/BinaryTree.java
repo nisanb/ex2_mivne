@@ -1,5 +1,6 @@
 public class BinaryTree {
 	public static  BNode root;
+        public static BNode lastBig;
 	public BinaryTree(){
 		this.root = null;
 	}
@@ -102,9 +103,11 @@ public class BinaryTree {
 		BNode newBNode = new BNode(id);
 		if(root==null){
 			root = newBNode;
+                        lastBig = root;
 			return;
 		}
-		BNode current = root;
+		BNode current = lastBig;
+                lastBig = newBNode;
 		BNode parent = null;
 		while(true){
 			parent = current;

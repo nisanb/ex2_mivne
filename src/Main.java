@@ -19,6 +19,7 @@ public class Main {
 	private static PrintWriter WRITER;
         private static BinaryTree bTree;
         private static RedBlackTree rbTree;
+        private static DoubleBTree bPTree;
 	// BPT, RBT BT
 
 	public static void main(String[] args) {
@@ -92,7 +93,7 @@ public class Main {
 
 	private static void testBinary() throws Exception{	
             bTree = new BinaryTree();
-            System.err.println("Testing b tree");
+        
             //Add new BNodes
                 
            
@@ -103,12 +104,12 @@ public class Main {
              BNode l = bTree.find(ARRAY.get(0));
              l = bTree.find(ARRAY.get(ARRAY.size()-1));
              bTree.find(1.0);
-             bTree.find((double)ARRAY.size()/2);
+             bTree.find(ARRAY.get(ARRAY.size()/2));
 
 
 
             SW.finish();
-            System.err.println(ARRAY.size()+"," + SW.getTotalRumTime());
+      
             WRITER.print("," + SW.getTotalRumTime());
                 
                 
@@ -132,7 +133,7 @@ public class Main {
                 Comparable l = rbTree.find(ARRAY.get(0));
                 l = rbTree.find(ARRAY.get(ARRAY.size()-1));
                 rbTree.find(1.0);
-                rbTree.find((double)ARRAY.size()/2);
+                rbTree.find(ARRAY.get(ARRAY.size()/2));
 
 
 		SW.finish();
@@ -143,7 +144,17 @@ public class Main {
 
 
 	private static void insertBP() throws Exception{
-         
+                bPTree = new DoubleBTree();
+                for(double d : ARRAY){
+                    bPTree.insert(d);
+                }
+            
+                System.err.println("Minimum: "+bPTree.search(ARRAY.get(0)));
+                System.err.println("Maximum: "+bPTree.search(ARRAY.get(ARRAY.size()-1)));
+                bPTree.search(1.0);
+                System.err.println("Middle: "+bPTree.search(ARRAY.get(ARRAY.size()/2)));
+            
+            
 		SW.start();
 
 
@@ -155,5 +166,18 @@ public class Main {
 		WRITER.print("," + SW.getTotalRumTime());
 }
 
+        
+        
+
 }
 
+class DoubleBTree extends BTree<Double, Double> {
+	public void insert(Double key) {
+		this.insert(key, key);
+	}
+	
+	public void remove(Double key) {
+		this.delete(key);
+	}
+
+}
