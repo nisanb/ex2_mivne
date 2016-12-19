@@ -38,7 +38,7 @@ public class Main {
         }
 
         //while exception isn't happened continue increasing n, and insert it to the trees.
-        WRITER.print("n, BST(findmin), BST(findmax), BST(findnone), BST(findmiddle), RBT(findmin), RBT(findmax), RBT(findnone), RBT(findmiddle), BT(findmin), BPT(findmax), BPT(findnone), BPT(findmiddle) \n");
+        WRITER.print("n, RBT(findmin), RBT(findmax), RBT(findnone), RBT(findmiddle), BPlusT(findmin), BPlusT(findmax), BPlusT(findnone), BPlusT(findmiddle), BST(findmin), BST(findmax), BST(findnone), BST(findmiddle) \n");
         int i = 1;
         while (true) {
             try {
@@ -49,10 +49,10 @@ public class Main {
                 /**
                  * Define Trees
                  */
-                testBinary();
+                
                 testRB();
                 insertBP();
-
+                testBinary();
                 WRITER.print("\n");
 
                 i *= 2;
@@ -96,20 +96,27 @@ public class Main {
             bTree.insert(d);
         }
 
+        //Find MIN
         SW.start();
         BNode l = bTree.find(ARRAY.get(0));
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
 
+        //Find MAX
         SW.start();
         l = bTree.find(ARRAY.get(ARRAY.size() - 1));
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
 
+        //Test MID Who doesn't exist!
         SW.start();
-        bTree.find(1.0);
+        Double mid = ((ARRAY.get(ARRAY.size()/2))+(ARRAY.get(ARRAY.size()/2+1)))/2;
+        bTree.find(mid);
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
+        
+
+        //Find MID
         SW.start();
         bTree.find(ARRAY.get(ARRAY.size() / 2));
         SW.finish();
@@ -117,9 +124,15 @@ public class Main {
 
     }
 
+    /**
+     * This method tests a RedBlack Tree
+     * @throws Exception 
+     */
     private static void testRB() throws Exception {
         rbTree = new RedBlackTree();
         double last = 0;
+        
+        //Insert Values to RB - Initiate Tree
         for (double d : ARRAY) {
             if (d == last) {
                 continue;
@@ -127,21 +140,26 @@ public class Main {
             rbTree.insert(d);
         }
 
+        //Find MIN
         SW.start();
         Comparable l = rbTree.find(ARRAY.get(0));
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
 
+        //Find MAX
         SW.start();
         l = rbTree.find(ARRAY.get(ARRAY.size() - 1));
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
 
+        //Find MID who doesn't exist
         SW.start();
-        rbTree.find(1.0);
+        Double mid = ((ARRAY.get(ARRAY.size()/2))+(ARRAY.get(ARRAY.size()/2+1)))/2;
+        rbTree.find(mid);
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
 
+        //Find MID
         SW.start();
         rbTree.find(ARRAY.get(ARRAY.size() / 2));
         SW.finish();
@@ -149,24 +167,39 @@ public class Main {
 
     }
 
+    /**
+     * Test B+ Tree
+     * @throws Exception 
+     */
     private static void insertBP() throws Exception {
+        
+        //Initiate Tree
         bPTree = new DoubleBTree();
+        //Insert Values
         for (double d : ARRAY) {
             bPTree.insert(d);
         }
 
+        //Search MIN
         SW.start();
         bPTree.search(ARRAY.get(0));
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
+        
+        //Search MAX
         SW.start();
         bPTree.search(ARRAY.get(ARRAY.size() - 1));
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
+        
+        //Search MID who doesn't exists
         SW.start();
-        bPTree.search(1.0);
+        Double mid = ((ARRAY.get(ARRAY.size()/2))+(ARRAY.get(ARRAY.size()/2+1)))/2;
+        bPTree.search(mid);
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
+        
+        //Search MID
         SW.start();
         bPTree.search(ARRAY.get(ARRAY.size() / 2));
         SW.finish();
