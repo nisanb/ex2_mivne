@@ -20,7 +20,7 @@ public class Main {
     private static StopWatch SW;
     private static PrintWriter WRITER;
     private static BinaryTree bTree;
-    private static RedBlackTree rbTree;
+    private static RedBlackBST<Double> rbTree;
     private static DoubleBTree bPTree;
     // BPT, RBT BT
 
@@ -117,8 +117,9 @@ public class Main {
         
 
         //Find MID
+        
         SW.start();
-        bTree.find(ARRAY.get(ARRAY.size() / 2));
+        bTree.delete(ARRAY.get(ARRAY.size() / 2));
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
 
@@ -129,7 +130,8 @@ public class Main {
      * @throws Exception 
      */
     private static void testRB() throws Exception {
-        rbTree = new RedBlackTree();
+        
+        rbTree = new RedBlackBST<Double>();
         double last = 0;
         
         //Insert Values to RB - Initiate Tree
@@ -142,26 +144,29 @@ public class Main {
 
         //Find MIN
         SW.start();
-        Comparable l = rbTree.find(ARRAY.get(0));
+        rbTree.search(ARRAY.get(0));
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
 
         //Find MAX
         SW.start();
-        l = rbTree.find(ARRAY.get(ARRAY.size() - 1));
+        rbTree.search(ARRAY.get(ARRAY.size() - 1));
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
 
         //Find MID who doesn't exist
+        
         SW.start();
-        Double mid = ((ARRAY.get(ARRAY.size()/2))+(ARRAY.get(ARRAY.size()/2+1)))/2;
-        rbTree.find(mid);
+        double tmpVar = (ARRAY.get(ARRAY.size()/2) + ARRAY.get(ARRAY.size()/2+1)) / 2;
+        rbTree.search(tmpVar);
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
 
         //Find MID
         SW.start();
-        rbTree.find(ARRAY.get(ARRAY.size() / 2));
+        double mid = ARRAY.get(ARRAY.size()/2);
+        RedBlackNode<Double> tmpNode = new RedBlackNode<Double>(mid);
+        rbTree.remove(tmpNode);
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
 
@@ -200,8 +205,9 @@ public class Main {
         WRITER.print("," + SW.getTotalRumTime());
         
         //Search MID
+        
         SW.start();
-        bPTree.search(ARRAY.get(ARRAY.size() / 2));
+        bPTree.delete(ARRAY.get(ARRAY.size()/2));
         SW.finish();
         WRITER.print("," + SW.getTotalRumTime());
 
